@@ -2,7 +2,7 @@
 
 
 
-[![CircleCI](https://circleci.com/gh/vhsantos26/qaninja-ruby.svg?style=shield&circle-token=e48231559fd932fbfe46d544dcae1aec06d8801b)](https://circleci.com/gh/vhsantos26/qaninja-ruby)
+[![CircleCI](https://circleci.com/gh/vhsantos26/resultados_digitais.svg?style=shield&circle-token=426eec69a01e4ff52018e7d76474e03255ba349a)](https://circleci.com/gh/vhsantos26/resultados_digitais)
 
 ## Documentation
 
