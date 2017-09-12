@@ -30,15 +30,14 @@ class NewLead < SitePrism::Page
     element :save_button, "input[name='commit']"
 
     def fill_in_all_leads_information
+        new_lead_email = Faker::Internet.unique.email
+
         lead_name.set Fake::Name::name
-        lead_email.set Faker::Internet.unique.email
+        lead_email.set new_lead_email
         lead_job_title.set Faker::Job.title
 
         lead_info_phone.set Faker::PhoneNumber.phone_number
         lead_info_cell_phone.set Faker::PhoneNumber.cell_phone
-        # lead_info_twitter
-        # lead_info_facebook
-        # lead_info_linkedin
         lead_info_site_blog.set Faker::Internet.url('info.com')
         lead_info_state.select "SC"
         lead_info_city.set "Joinville"
@@ -48,10 +47,9 @@ class NewLead < SitePrism::Page
         lead_company_size.set Faker::Number.number(3)
         lead_company_email.set Faker::Internet.email
         lead_company_site.set  Faker::Internet.url('company.com')
-        # lead_company_twitter
-        # lead_company_facebook
         lead_company_phone.set Faker::PhoneNumber.phone_number
         lead_company_address.set Faker::Address.street_address
-
+        
+        new_lead_email
     end
 end
