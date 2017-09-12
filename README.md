@@ -6,21 +6,28 @@
 
 ## Description
 
-UI Tests for an Base of Leads App.
+UI Tests for RD Station.
 
 ## Observed issues
 
-* Right after login, on dashboard page, occurs a JavaScript error:
+* Right after login, on dashboard page, occurs two JavaScript errors:
 
 ```javascript
-fbevents.js - Failed to load resource: the server responded with a status of 403 (Forbidden)
-
-cm Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+Failed to load resource: the server responded with a status of 403 (Forbidden)
+```
+```javascript
+Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
 ```
 
-* After save the Financial information, data update alert appear in wrong place, whereas all of alerts appears at right bottom corner.
+* After save the Financial information, data update alert appear in wrong place, as all of alerts appears at right bottom corner, and that appears at top. Besides that, there are two different behaviors for presenting such, while one overwrite the help button and another don't (*Blog Tools without a term overwrite the help button and when Account Overview are save, alert show up above the help button*).
 
 # Automation
+
+All scenarios are describe right [here](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/connect/base_of_leads.feature).
+
+## Description
+
+UI Automation Tests for Base of Leads App.
 
 ## Requirements
 
