@@ -36,9 +36,14 @@ class LeadsPage < SitePrism::Page
         wait_until_export_leads_table_visible
         export_leads_table.click
     end
+
+    def search_lead lead_info
+        search_input.set lead_info
+        search_input.send_keys(:enter)
+    end
 end
 
-class NewLead < SitePrism::Page
+class NewLeadPage < SitePrism::Page
     element :event_name, "#source"
     element :lead_name, "#lead_name"
     element :lead_email, "#lead_email"
@@ -64,17 +69,14 @@ class NewLead < SitePrism::Page
     element :lead_bio, "lead_bio"
     element :save_button, "input[name='commit']"
 
-    def fill_in_all_leads_information
-        new_lead_email = Faker::Internet.unique.email
-
-        lead_name.set Faker::Name::name
-        lead_email.set new_lead_email
+    def fill_in_all_leads_information new_lead_name
+        lead_name.set new_lead_name
+        lead_email.set Faker::Internet.unique.email
         lead_job_title.set Faker::Job.title
         lead_info_phone.set Faker::PhoneNumber.phone_number
         lead_info_cell_phone.set Faker::PhoneNumber.cell_phone
         lead_info_site_blog.set Faker::Internet.url('info.com')
         lead_info_state.select "SC"
-        #lead_info_city.set "Joinville"
         lead_company_name.set Faker::Company.name
         lead_company_sector.set Faker::Company.buzzword
         lead_company_size.set Faker::Number.number(3)
@@ -82,7 +84,28 @@ class NewLead < SitePrism::Page
         lead_company_site.set  Faker::Internet.url('company.com')
         lead_company_phone.set Faker::PhoneNumber.phone_number
         lead_company_address.set Faker::Address.street_address
+    end
+end
 
-        new_lead_email
+class LeadDetailPage < SitePrism::Page
+    element :lead_name, "#lead-name"
+    element :lead_job, "#lead-job-title"
+    element :lead_life_cycle, "#lead-lifecycle-stage"
+    element :lead_owner, "#lead-owner"
+    element :edit_lead, ".lead-edit"
+    element :action_options, ".btn.btn-default.dropdown-toggle"
+    element :match_lead, :link, "Combinar"
+    element :remove_lead, :link, "Apagar Lead"
+
+    def click_on_match_lead
+        action_options.click
+        wait_until__match_lead_visible
+        match_lead.click
+    end
+
+    def click_on_remove_lead
+        action_options.click
+        wait_until_remove_lead_visible
+        remove_lead.click
     end
 end

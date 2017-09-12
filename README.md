@@ -18,3 +18,5 @@
 - Clone this project
 - On path `resultados_digitais/` execute `bundle install`
 - Run all test with `bundle exec cucumber --tags ~@wip`
+
+## What was done
