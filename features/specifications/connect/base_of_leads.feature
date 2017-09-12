@@ -1,4 +1,4 @@
-@include_new_leads @wip
+@include_new_leads
 Feature: Include new leads
   In order to incrase my base of leads.
   As a RD client.
@@ -13,5 +13,5 @@ Feature: Include new leads
       Given I am on Insert New Leads page.
       When I fill in all lead information.
       And I click on save button.
-      Then I should see a lead information.
-      And Funnel Stage are 'Lead'.
+      Then I should see my new lead information.
+      And The Funnel Stage are 'Lead'.
