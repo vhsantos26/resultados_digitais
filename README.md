@@ -19,7 +19,7 @@ Failed to load resource: the server responded with a status of 403 (Forbidden)
 Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
 ```
 
-* After save the Financial information, data update alert appear in wrong place, as all of alerts appears at right bottom corner, and that appears at top. Besides that, there are two different behaviors for presenting such, while one overwrite the help button and another don't (*Blog Tools without a term overwrite the help button and when Account Overview are save, alert show up above the help button*).
+* After save the Financial information, data update alert appear in wrong place, as all of alerts appears at right bottom corner, and that appears at top. Besides that, there are two different behaviors for presenting such, while one overwrite the help button and another don't (*Blog Tools without a term alert overwrite the help button and, when Account Overview are save, alert show up above the help button*).
 
 # Automation
 

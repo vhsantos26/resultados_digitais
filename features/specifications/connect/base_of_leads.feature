@@ -12,12 +12,19 @@ Feature: Include new leads
     Scenario: Include a new lead with all information filled.
         Given I am on Insert New Leads page.
         When I fill in all lead information.
-        And I click on save button.
+        And I save this register.
         Then I should see my new lead information.
         And Life Cycle are 'Lead'.
 
+    @import_leads @wip
+    Scenario: Import a new lead from CSV file for inclusion.
+        When I click on Import Leads.
+        And I import a file with one lead.
+        Then I should see that my import was successful.
+        And after search, I should see my lead.
+
     @remove_lead
-    Scenario: Remove a exist lead.
-        When I click to edit first lead at my list.
-        And I click on remove this lead.
+    Scenario: Remove a exist lead from the Base of Leads.
+        When I edit first lead at my list.
+        And I remove this lead.
         Then I don't should see my lead after search it.

@@ -2,6 +2,7 @@ login_page = LoginPage.new
 leads_page = LeadsPage.new
 new_leads_page = NewLeadPage.new
 lead_detail_page = LeadDetailPage.new
+import_leads_page = ImportLeadsPage.new
 
 new_lead_name = Faker::Name.unique.name
 
@@ -22,7 +23,7 @@ When(/^I fill in all lead information.$/) do
     new_leads_page.fill_in_all_leads_information new_lead_name
 end
 
-And(/^I click on save button.$/) do
+And(/^I save this register.$/) do
     new_leads_page.save_button.click
 end
 
@@ -34,12 +35,12 @@ And (/^Life Cycle are '(.*?)'.$/) do |life_cycle|
     expect(lead_detail_page.lead_life_cycle).to have_content "Estágio do funil: #{life_cycle}"
 end
 
-When(/^I click to edit first lead at my list.$/) do
+When(/^I edit first lead at my list.$/) do
     leads_page.edit_lead.first.click
     @remove_lead_name = lead_detail_page.lead_name.text
 end
 
-And(/^I click on remove this lead.$/) do
+And(/^I remove this lead.$/) do
     lead_detail_page.click_on_remove_lead
     lead_detail_page.accept_alert
 end
