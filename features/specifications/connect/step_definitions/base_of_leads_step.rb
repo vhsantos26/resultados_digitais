@@ -4,8 +4,6 @@ new_leads_page = NewLeadPage.new
 lead_detail_page = LeadDetailPage.new
 import_leads_page = ImportLeadsPage.new
 
-new_lead_name = Faker::Name.unique.name
-
 Given(/^I have logged in.$/) do
     login_page.load
     login_page.log_in "vhsantos26@gmail.com", "111111"
@@ -20,7 +18,8 @@ And(/^I am on Insert New Leads page.$/) do
 end
 
 When(/^I fill in all lead information.$/) do
-    new_leads_page.fill_in_all_leads_information new_lead_name
+    @new_lead_name = Faker::Name.unique.name
+    new_leads_page.fill_in_all_leads_information @new_lead_name
 end
 
 And(/^I save this register.$/) do
@@ -28,7 +27,7 @@ And(/^I save this register.$/) do
 end
 
 Then(/^I should see my new lead information.$/) do
-    expect(lead_detail_page.lead_name).to have_content new_lead_name
+    expect(lead_detail_page.lead_name).to have_content @new_lead_name
 end
 
 And (/^Life Cycle are '(.*?)'.$/) do |life_cycle|
@@ -48,4 +47,30 @@ end
 Then(/^I don't should see my lead after search it.$/) do
     leads_page.search_lead @remove_lead_name
     expect(leads_page).to have_content "Não foram encontrados Leads para a sua busca."
+end
+
+When(/^I click on Import Leads.$/) do
+    leads_page.import_leads.click
+end
+
+And(/^I import a file with one lead.$/) do
+    @conversion_name = Faker::Name.unique.first_name
+    import_leads_page.load_list_import_file.set File.absolute_path("features/resources/leads.csv")
+    import_leads_page.accept_all_terms
+    import_leads_page.load_list_import_reason.select "Inclusão - Leads em outro sistema que não tem integração"
+    import_leads_page.load_list_confirm_button.click
+    import_leads_page.combine_fields_save_and_proceed_button.click
+    import_leads_page.generate_conversion :conversion => true
+    import_leads_page.conversion_name.set @conversion_name
+    import_leads_page.conversion_import_button.click
+end
+
+Then(/^I should see that my import was successful.$/) do
+    expect(import_leads_page.import_list_status.first).to have_content "importada"
+end
+
+And(/^after search, I should see my lead.$/) do
+    leads_page.load
+    leads_page.search_lead @conversion_name
+    expect(leads_page).to have_content @conversion_name
 end

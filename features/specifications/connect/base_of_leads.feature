@@ -2,7 +2,7 @@
 Feature: Include new leads
     In order to incrase my base of leads.
     As a RD client.
-    I want to include new leads manually.
+    I want to include new leads.
 
     Background: Login and access base of leads page.
         Given I have logged in.
@@ -15,6 +15,12 @@ Feature: Include new leads
         And I save this register.
         Then I should see my new lead information.
         And Life Cycle are 'Lead'.
+
+    @include_lead @without_email @exception @wip
+    Scenario: Include a new lead without email.
+        Given I am on Insert New Leads page.
+        When I save this register.
+        Then I should see a alert about required field.
 
     @import_leads @wip
     Scenario: Import a new lead from CSV file for inclusion.

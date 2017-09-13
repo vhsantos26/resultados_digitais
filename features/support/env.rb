@@ -9,6 +9,8 @@ Capybara.default_driver = :selenium
 Capybara.default_max_wait_time = 10
 Capybara.app_host = 'https://app-staging.rdstation.com.br/'
 
+Capybara.ignore_hidden_elements = false
+
 Before do |scenario|
     job_name = "#{scenario.feature.name} - #{scenario.name}"
     Capybara.register_driver :selenium do |app|
