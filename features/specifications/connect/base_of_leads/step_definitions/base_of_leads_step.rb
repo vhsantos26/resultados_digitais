@@ -64,7 +64,7 @@ When(/^I select first Lead at the list.$/) do
     @lead_name = BaseOfLeadsModule.lead_detail_page.lead_name.text
 end
 
-And(/^I edit this Lead.$/) do 
+And(/^I edit this Lead.$/) do
     BaseOfLeadsModule.lead_detail_page.edit_lead.click
 end
 
@@ -73,15 +73,15 @@ And(/^I select '(.*?)' for funnel stage.$/) do |funnel_stage|
     BaseOfLeadsModule.edit_lead_page.lead_funnel_stage.select funnel_stage
 end
 
-And(/^I save this change.$/) do 
+And(/^I save this change.$/) do
     BaseOfLeadsModule.edit_lead_page.save_button.click
 end
-    
-Then(/^I should see the log about funnel activity.$/) do 
+
+Then(/^I should see the log about funnel activity.$/) do
     expect(BaseOfLeadsModule.lead_detail_page).to have_content "Teve seu estágio no funil alterado para '#{@funnel_stage}'."
 end
-    
-And(/^I should see the Lead after search it with segmentation filter.$/) do 
+
+And(/^I should see the Lead after search it with segmentation filter.$/) do
     BaseOfLeadsModule.leads_page.load
     BaseOfLeadsModule.leads_page.segmentation_filter.select "Leads Qualificados (estágio no funil)"
     expect(BaseOfLeadsModule.leads_page).to have_content @lead_name
@@ -96,4 +96,3 @@ Then(/^I don't should see the Lead after search it.$/) do
     BaseOfLeadsModule.leads_page.search_lead @lead_name
     expect(BaseOfLeadsModule.leads_page).to have_content "Não foram encontrados Leads para a sua busca."
 end
-

@@ -8,7 +8,7 @@ Feature: Include new leads
         Given I have logged in.
         And I have access to Base of Leads App.
 
-    @core @all_lead_info 
+    @core @all_lead_info
     Scenario: Include a new lead with all information filled.
         Given I am on Insert New Leads page.
         When I fill in all Lead information.
@@ -29,7 +29,7 @@ Feature: Include new leads
         When I save this register.
         Then I should see a alert about required field.
 
-    @exception @edit_lead
+    @exception @edit_lead @bug
     Scenario: Edit lead and change the funnel stage.
         When I select first Lead at the list.
         And I edit this Lead.

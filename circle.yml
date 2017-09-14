@@ -13,4 +13,4 @@ test:
   override:
     - bundle install
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - bundle exec cucumber --tags ~@wip --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
+    - bundle exec cucumber --tags ~@wip,~@bug --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
