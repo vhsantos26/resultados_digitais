@@ -16,7 +16,7 @@ Feature: Include new leads
         Then I should see the new Lead information.
         And Funnel Stage are 'Lead'.
 
-    @core @import_lead @wip
+    @core @import_lead
     Scenario: Import a new lead from CSV file for inclusion.
         When I click on Import Leads.
         And I import a file with one Lead.

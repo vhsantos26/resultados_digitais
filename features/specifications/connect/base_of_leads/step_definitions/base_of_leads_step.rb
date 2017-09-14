@@ -46,6 +46,8 @@ And(/^I import a file with one Lead.$/) do
 end
 
 Then(/^I should see that import was successful.$/) do
+    BaseOfLeadsModule.import_leads_page.wait_until_import_list_status_visible(15)
+    #wait_until_BaseOfLeadsModule.import_leads_page.import_list_status.first_visible
     expect(BaseOfLeadsModule.import_leads_page.import_list_status.first).to have_content "importada"
 end
 
