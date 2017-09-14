@@ -8,7 +8,7 @@ class LeadsPage < SitePrism::Page
     element :custom_fields, :link, "Campos personalizados"
     element :export_leads_table, :link, "Exportar tabela de Leads"
     element :search_input, ".tt-query"
-    element :segmentation_filter, "#segmentation_list"
+    element :segmentation_filter, "select[id='segmentation_list']"
     elements :lead_detail, ".edit-info-link"
 
     def click_on_insert_lead
