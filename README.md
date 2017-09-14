@@ -31,3 +31,5 @@ Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
 ```
 
 * After save the Financial information, data update alert appears in the wrong place, all the alerts appear at right bottom corner, and that appears at top. Besides that, there are two different behaviors for presenting such, while one overwrite the help button, the other doesn't (*Blog Tools without a term alert overwrite the help button and, when Account Overview are save, alert show up above the help button*).
+
+* Import processing may be faster. On tests, CSV file have one basic lead and, sometimes processing delay are more then 30 seconds

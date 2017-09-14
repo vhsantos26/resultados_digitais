@@ -2,6 +2,7 @@ class LeadsPage < SitePrism::Page
     set_url "leads/"
 
     element :import_leads, :link, "Importar Leads"
+    element :insert_lead_manually, :link, "inserir Leads manualmente"
     element :action_options, ".btn.btn-primary.dropdown-toggle"
     element :insert_lead, :link, "Inserir Lead"
     element :insert_company, :link, "Inserir empresa"

@@ -20,6 +20,8 @@ Feature: Include new leads
     Scenario: Import a new lead from CSV file for inclusion.
         When I click on Import Leads.
         And I import a file with one Lead.
+        And I accept all terms.
+        And I choose for conversion for all of Leads.
         Then I should see that import was successful.
         And after search, I should see one Lead as a result.
 
@@ -29,7 +31,7 @@ Feature: Include new leads
         When I save this register.
         Then I should see a alert about required field.
 
-    @exception @edit_lead @wip
+    @edit_lead
     Scenario: Edit lead and change the funnel stage.
         When I select first Lead at the list.
         And I edit this Lead.
