@@ -26,15 +26,19 @@ And(/^I save this register.$/) do
     new_leads_page.save_button.click
 end
 
-Then(/^I should see my new lead information.$/) do
+Then(/^I should see the new lead information.$/) do
     expect(lead_detail_page.lead_name).to have_content @new_lead_name
 end
 
-And (/^Life Cycle are '(.*?)'.$/) do |life_cycle|
+And (/^Funnel Stage are '(.*?)'.$/) do |life_cycle|
     expect(lead_detail_page.lead_life_cycle).to have_content "Estágio do funil: #{life_cycle}"
 end
 
-When(/^I edit first lead at my list.$/) do
+Then(/^I should see a alert about required field.$/) do
+    expect(new_leads_page).to have_content "Não foi possível criar o Lead, por favor verifique os campos"
+end
+
+When(/^I edit first lead at the list.$/) do
     leads_page.edit_lead.first.click
     @remove_lead_name = lead_detail_page.lead_name.text
 end
@@ -44,7 +48,7 @@ And(/^I remove this lead.$/) do
     lead_detail_page.accept_alert
 end
 
-Then(/^I don't should see my lead after search it.$/) do
+Then(/^I don't should see the lead after search it.$/) do
     leads_page.search_lead @remove_lead_name
     expect(leads_page).to have_content "Não foram encontrados Leads para a sua busca."
 end
@@ -65,11 +69,11 @@ And(/^I import a file with one lead.$/) do
     import_leads_page.conversion_import_button.click
 end
 
-Then(/^I should see that my import was successful.$/) do
+Then(/^I should see that     import was successful.$/) do
     expect(import_leads_page.import_list_status.first).to have_content "importada"
 end
 
-And(/^after search, I should see my lead.$/) do
+And(/^after search, I should see one Lead as a result.$/) do
     leads_page.load
     leads_page.search_lead @conversion_name
     expect(leads_page).to have_content @conversion_name
