@@ -20,7 +20,7 @@ class NewLeadPage < SitePrism::Page
         lead_name.set new_lead_name
         lead_email.set Faker::Internet.unique.email
         lead_job_title.set Faker::Job.title
-        lead_info_phone.set Faker::PhoneNumber.phone_number
+        lead_info_phone.set Faker::Number.number(8)
         lead_info_cell_phone.set Faker::PhoneNumber.cell_phone
         lead_info_site_blog.set Faker::Internet.url('info.com')
         lead_info_state.select "SC"

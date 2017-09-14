@@ -29,7 +29,7 @@ Feature: Include new leads
         When I save this register.
         Then I should see a alert about required field.
 
-    @exception @edit_lead @bug
+    @exception @edit_lead @wip
     Scenario: Edit lead and change the funnel stage.
         When I select first Lead at the list.
         And I edit this Lead.
