@@ -1,8 +1,6 @@
 class LeadDetailPage < SitePrism::Page
     element :lead_name, "#lead-name"
-    element :lead_job, "#lead-job-title"
-    element :lead_life_cycle, "#lead-lifecycle-stage"
-    element :lead_owner, "#lead-owner"
+    element :lead_funnel_stage, "#lead-lifecycle-stage"
     element :edit_lead, ".lead-edit"
     element :action_options, ".btn.btn-default.dropdown-toggle"
     element :match_lead, :link, "Combinar"

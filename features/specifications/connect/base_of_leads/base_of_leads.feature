@@ -11,34 +11,35 @@ Feature: Include new leads
     @core @all_lead_info 
     Scenario: Include a new lead with all information filled.
         Given I am on Insert New Leads page.
-        When I fill in all lead information.
+        When I fill in all Lead information.
         And I save this register.
-        Then I should see the new lead information.
+        Then I should see the new Lead information.
         And Funnel Stage are 'Lead'.
 
     @core @import_lead @wip
     Scenario: Import a new lead from CSV file for inclusion.
         When I click on Import Leads.
-        And I import a file with one lead.
+        And I import a file with one Lead.
         Then I should see that import was successful.
         And after search, I should see one Lead as a result.
 
-    @exception @without_email @wip
+    @exception @without_email
     Scenario: Include a new lead without email.
         Given I am on Insert New Leads page.
         When I save this register.
         Then I should see a alert about required field.
 
-    @exception @edit_lead @bug @wip
+    @exception @edit_lead
     Scenario: Edit lead and change the funnel stage.
-        When I edit first lead at the list.
+        When I select first Lead at the list.
+        And I edit this Lead.
         And I select 'Lead Qualificado' for funnel stage.
         And I save this change.
         Then I should see the log about funnel activity.
-        And after search with segmentation filter, I should see the lead.
+        And I should see the Lead after search it with segmentation filter.
 
     @remove_lead
-    Scenario: Remove a exist lead from the Base of Leads.
-        When I edit first lead at the list.
-        And I remove this lead.
-        Then I don't should see the lead after search it.
+    Scenario: Remove a exist Lead from the Base of Leads.
+        When I select first Lead at the list.
+        And I remove this Lead.
+        Then I don't should see the Lead after search it.

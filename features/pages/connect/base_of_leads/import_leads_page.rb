@@ -8,7 +8,6 @@ class ImportLeadsPage < SitePrism::Page
     element :combine_fields_save_and_proceed_button, "#js-save-and-proceed"
     element :conversion_option_false, ".js-create-conversion-false"
     element :conversion_option_true, ".js-create-conversion-true"
-    element :conversion_date, "#lead_import_conversion_date"
     element :conversion_name, "#lead_import_name"
     element :conversion_import_button, "#js-import"
     elements :import_list_status, "table[id='table-leadimport-index'] > tbody > tr"
