@@ -6,7 +6,7 @@
 
 ## Description
 
-UI Tests for RD Station app. All automated scenarios are describe right [here](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/connect/base_of_leads.feature).
+UI Tests for RD Station app. All automated scenarios are describe right [here](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/connect/base_of_leads/base_of_leads.feature).
 
 ## Requirements
 
