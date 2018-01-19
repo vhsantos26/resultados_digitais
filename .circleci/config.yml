@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/circle-ci-qaninja
+    working_directory: ~/circle-ci-resultados-digitais
     docker:
       - image: circleci/ruby:2.3.4-browsers
 
