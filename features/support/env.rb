@@ -1,31 +1,19 @@
-require "capybara/cucumber"
-require "selenium-webdriver"
-require "site_prism"
-require "require_all"
-require "rspec/expectations"
-require "faker"
+require 'allure-cucumber'
+require 'capybara/cucumber'
+require 'rspec/expectations'
+require 'selenium-webdriver'
+require 'site_prism'
 
-Capybara.default_driver = :selenium
-Capybara.default_max_wait_time = 10
-Capybara.app_host = 'https://app-staging.rdstation.com.br/'
-
-Capybara.ignore_hidden_elements = false
-
-Before do |scenario|
-    job_name = "#{scenario.feature.name} - #{scenario.name}"
-    Capybara.register_driver :selenium do |app|
-        Capybara::Selenium::Driver.new(app,
-        :browser => :chrome,
-        desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
-            'chromeOptions' => {
-                'args' => ['--start-maximized', '--disable-infobars']
-            }
-        ))
-    end
-    Capybara.session_name = "#{job_name}"
-    @driver = Capybara.current_session.driver
+Capybara.configure do |c|
+  c.app_host = 'https://app-staging.rdstation.com.br/'
+  c.default_driver = :selenium_chrome_headless
+  c.ignore_hidden_elements = false
 end
 
-After do |scenario|
-    @driver.quit
+Capybara.default_max_wait_time = 10
+
+AllureCucumber.configure do |c|
+  c.include AllureCucumber::DSL
+  c.output_dir = 'log/reports'
+  c.clean_dir = true
 end

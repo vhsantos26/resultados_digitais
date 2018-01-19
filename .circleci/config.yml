@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circle-ci-qaninja
+    docker:
+      - image: circleci/ruby:2.3.4-browsers
+
+    steps:
+      - checkout
+      
+      # Restore bundle cache
+      - type: cache-restore
+        name: Restore bundle cache
+        key: qaninja-bundle-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Bundle install
+          command: bundle install --path vendor/bundle
+
+      # Store bundle cache
+      - type: cache-save
+        name: Store bundle cache
+        key: qaninja-bundle-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # Run cucumber
+      - run:
+          name: Run cucumber tests
+          command: bundle exec cucumber --tags ~@wip --format junit --out ~/cucumber/junit.xml
+
+      # Save test results for timing analysis
+      - store_test_results:
+          path: ~/cucumber/junit.xml
