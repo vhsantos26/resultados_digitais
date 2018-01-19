@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/circle-ci-resultados-digitais
     docker:
-      - image: circleci/ruby:2.3.4-browsers
+      - image: circleci/ruby:latest-browsers
 
     steps:
       - checkout
