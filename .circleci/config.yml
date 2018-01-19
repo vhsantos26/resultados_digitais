@@ -27,7 +27,7 @@ jobs:
       # Run cucumber
       - run:
           name: Run cucumber tests
-          command: bundle exec cucumber --tags ~@wip --format junit --out ~/cucumber/junit.xml
+          command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
 
       # Save test results for timing analysis
       - store_test_results:
