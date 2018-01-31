@@ -6,7 +6,6 @@ require 'site_prism'
 
 Capybara.configure do |c|
   c.app_host = 'https://app-staging.rdstation.com.br/'
-  c.default_driver = :selenium_chrome
   c.ignore_hidden_elements = false
   c.default_max_wait_time = 5
 end
