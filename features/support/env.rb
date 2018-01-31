@@ -9,16 +9,16 @@ Capybara.configure do |c|
   c.default_driver = :selenium_chrome
   c.ignore_hidden_elements = false
   c.default_max_wait_time = 5
+end
 
-  c.register_driver c.default_driver do |app|
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
-        'chromeOptions' => {
-          'args' => ['--disable-infobars', '--window-size=1366,768']
-        }
-      )
+Capybara.register_driver Capybara.default_driver do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+      'chromeOptions' => {
+        'args' => ['--disable-infobars', '--window-size=1366,768']
+      }
     )
-  end
+  )
 end
