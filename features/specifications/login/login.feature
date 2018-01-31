@@ -4,6 +4,7 @@ Feature: Login
   As a RD client.
   I want to login with my user.
 
+  @successful
   Scenario: Login successfully.
 		Given I'm at login page.
 		When I login with correct user.

@@ -1,4 +1,4 @@
-require 'allure-cucumber'
+require 'capybara'
 require 'capybara/cucumber'
 require 'rspec/expectations'
 require 'selenium-webdriver'
@@ -6,14 +6,19 @@ require 'site_prism'
 
 Capybara.configure do |c|
   c.app_host = 'https://app-staging.rdstation.com.br/'
-  c.default_driver = :selenium_chrome_headless
+  c.default_driver = :selenium_chrome
   c.ignore_hidden_elements = false
-end
+  c.default_max_wait_time = 5
 
-Capybara.default_max_wait_time = 10
-
-AllureCucumber.configure do |c|
-  c.include AllureCucumber::DSL
-  c.output_dir = 'log/reports'
-  c.clean_dir = true
+  c.register_driver c.default_driver do |app|
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+        'chromeOptions' => {
+          'args' => ['--disable-infobars', '--window-size=1366,768']
+        }
+      )
+    )
+  end
 end

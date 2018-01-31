@@ -5,5 +5,5 @@ Feature: Include new leads
   I want to include, import, edit, remove all of my Leads.
 
   Scenario: Login and access base of Leads page.
-		Given I have logged in.
-		And I have access to Base of Leads App.
+    Given I have logged in.
+    And I have access to Base of Leads App.
