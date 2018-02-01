@@ -1,23 +1,21 @@
-require_relative '../../pages/login/login_page'
-require_relative '../../pages/dashboard/dashboard_page'
+require_relative '../../pages/app'
 
-login = LoginPage.new
-dashboard = DashboardPage.new
+app = App::Application.new
 
-Given(/I'm at login page./) do
-  login.load
+When('I login with {string} email and {string} password.') do |email, password|
+  app.login_index.load
+  app.login_index.log_in(email, password)
 end
 
-When(/I login with correct user./) do
-  login.log_in('vhsantos26@gmail.com', '111111')
+Then('I am authenticated successfully.') do
+  expect(app.dashboard_index.navbar).to have_logo
 end
 
-Then(/I should see Dashboard page./) do
-  expect(dashboard.title).to have_content 'Challenge Project'
+Then('I should see Dashboard page.') do
+  expect(app.dashboard_index.title).to have_content 'Challenge Project'
 end
 
-Given(/I have logged in./) do
-  step "I'm at login page."
-  step 'I login with correct user.'
-  dashboard.wait_until_title_visible(10)
+Given('I have logged in.') do
+  step 'I login with "vhsantos26@gmail.com" email and "111111" password.'
+  step 'I am authenticated successfully.'
 end

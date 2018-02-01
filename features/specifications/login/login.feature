@@ -6,6 +6,6 @@ Feature: Login
 
   @successful
   Scenario: Login successfully.
-		Given I'm at login page.
-		When I login with correct user.
-    Then I should see Dashboard page.
+		When I login with "vhsantos26@gmail.com" email and "111111" password.
+    Then I am authenticated successfully.
+    And I should see Dashboard page.

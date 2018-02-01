@@ -6,16 +6,21 @@
 
 ## Description
 
-UI Tests for RD Station app. All automated scenarios are describe right [here](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/connect/base_of_leads/base_of_leads.feature).
+UI Tests for RD Station app. All automated scenarios are describe here:
+
+- [Login](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/login/login.feature).
+- [Leads](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/relate/base/lead.feature).
 
 ## Requirements
 
-- Ruby 2.3.3
+- Ruby 2.4
 - Google Chrome
 
 ## How to run
 
-- Clone the project
+Usage:
+
+- Clone this project
 - On path `resultados_digitais/` execute the command `bundle install`
 - Run all test with `bundle exec cucumber --tags ~@wip`
 

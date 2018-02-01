@@ -8,6 +8,10 @@ Feature: Include new leads
     Given I have logged in.
     And I have access to Base of Leads App.
 
-  Scenario: Teste
-    Given Teste right
-    
+  @new_lead
+  Scenario: Insert successfully lead when it's was created manually.
+    And I insert a new lead manually with:
+      | event_name         | name               | email             |
+      | Manually inclusion | Lanre Themistocles | Lanre@fleckens.hu |
+    When I save this registed.
+    Then I should see the new lead informations.

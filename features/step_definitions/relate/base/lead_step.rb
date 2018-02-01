@@ -1,11 +1,19 @@
-require_relative '../../../pages/relate/base/leads_page'
+require_relative '../../../pages/relate/base/leads'
 
-lead_page = LeadsPage.new
+lead = Leads.new
 
-Given(/I have access to Base of Leads App./) do
-  lead_page.load
+Given('I have access to Base of Leads App.') do
+  lead.load
 end
 
-Given(/Teste right/) do
-  pending 'Need to do this'
+Given('I insert a new lead manually with:') do |table|
+  lead_info = table.hashes
+end
+
+When('I save this registed.') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('I should see the new lead informations.') do
+  pending # Write code here that turns the phrase above into concrete actions
 end

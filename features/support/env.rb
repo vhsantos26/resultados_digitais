@@ -16,7 +16,7 @@ Capybara.register_driver Capybara.default_driver do |app|
     browser: :chrome,
     desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
       'chromeOptions' => {
-        'args' => ['--disable-infobars', '--window-size=1366,768']
+        'args' => ['--disable-infobars', '--start-maximized']
       }
     )
   )
