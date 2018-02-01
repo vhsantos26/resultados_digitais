@@ -7,7 +7,8 @@ Given('I have access to Base of Leads App.') do
 end
 
 Given('I insert a new lead manually with:') do |table|
-  lead_info = table.hashes
+  puts table.hashes
+  pending # Write code here that turns the phrase above into concrete actions
 end
 
 When('I save this registed.') do

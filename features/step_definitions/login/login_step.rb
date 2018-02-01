@@ -2,7 +2,7 @@ require_relative '../../pages/app'
 
 app = App::Application.new
 
-When('I login with {string} email and {string} password.') do |email, password|
+When('I perform authentication with {string} email and {string} password.') do |email, password|
   app.login_index.load
   app.login_index.log_in(email, password)
 end
@@ -16,6 +16,6 @@ Then('I should see Dashboard page.') do
 end
 
 Given('I have logged in.') do
-  step 'I login with "vhsantos26@gmail.com" email and "111111" password.'
+  step 'I perform authentication with "vhsantos26@gmail.com" email and "111111" password.'
   step 'I am authenticated successfully.'
 end
