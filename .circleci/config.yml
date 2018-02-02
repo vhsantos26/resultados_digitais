@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  checkout-code:
+  checkout_code:
     docker:
       - image: circleci/ruby:2.4-node
     working_directory: ~/resultados-digitais
@@ -15,7 +15,7 @@ jobs:
           paths:
             - ~/resultados-digitais
 
-  build-denpendencies:
+  bundle_dependencies:
     working_directory: ~/resultados-digitais  
     docker:
       - image: circleci/ruby:2.4-node
@@ -31,6 +31,21 @@ jobs:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - ~/resultados-digitais/vendor/bundle
+  
+  code_analyzer:
+    working_directory: ~/resultados-digitais  
+        docker:
+          - image: circleci/ruby:2.4-node
+        steps:
+          - restore_cache:
+              keys:
+                - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+          - restore_cache:
+              keys:
+                - rd-bundle-{{ checksum "Gemfile.lock" }}
+          run:
+            name: Run static code analyzer
+            command: rubocop
 
   test:
     working_directory: ~/resultados-digitais
@@ -56,12 +71,15 @@ workflows:
     triggers:
       - schedule:
         cron: "0 0 * * *"
-  build-and-test:
+  build_and_test:
     jobs:
-      - checkout-code
-      - build-denpendencies
+      - checkout_code
+      - bundle_dependencies
           requires: 
-            - checkout-code
+            - checkout_code
+      - code_analyzer:
+          requires:
+            - bundle_dependencies
       - test:
           requires:
-            - build-denpendencies
+            - bundle_dependencies
