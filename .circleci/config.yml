@@ -79,6 +79,10 @@ workflows:
     triggers: 
       - schedule:
           cron: "0 */6 * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - checkout_code
       - bundle_dependencies:
