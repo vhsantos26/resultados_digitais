@@ -1,4 +1,5 @@
 version: 2
+
 jobs:
   checkout_code:
     working_directory: ~/resultados-digitais
@@ -9,7 +10,7 @@ jobs:
       -save_cache:
         key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
         paths:
-          ~/resultados-digitais
+          - ~/resultados-digitais
   
   bundle_denpendencies:
     working_directory: ~/resultados-digitais  
@@ -17,9 +18,11 @@ jobs:
       - image: circleci/ruby:2.4-node
     steps:
       - restore_cache:
-          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+          keys: 
+            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+          keys: 
+            - rd-bundle-{{ checksum "Gemfile.lock" }}
       run: bundle install --path vendor/bundle
       - save_cache:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
@@ -32,11 +35,15 @@ jobs:
       - image: circleci/ruby:latest-browsers
     steps:
       - restore_cache:
-          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+          keys: 
+            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+          keys: 
+            - rd-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
-      - run: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
+      - run: 
+          name: Run cucumber tests
+          command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
       - store_test_results:
           path: ~/cucumber/junit.xml
 
