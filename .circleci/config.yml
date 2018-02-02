@@ -14,7 +14,12 @@ jobs:
         key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
         paths:
           - ~/resultados-digitais
-  
+        run: bundle install --path vendor/bundle
+      - save_cache:
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+        paths:
+          - ~/resultados-digitais/vendor/bundle
+          
   bundle-denpendencies:
     working_directory: ~/resultados-digitais  
     docker:
