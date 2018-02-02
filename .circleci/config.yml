@@ -70,7 +70,7 @@ workflows:
   nightl:
     triggers:
       - schedule:
-        cron: "0 0 * * *"
+        cron: "0 */6 * * *"
   build_and_test:
     jobs:
       - checkout_code
