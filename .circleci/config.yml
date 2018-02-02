@@ -61,7 +61,6 @@ jobs:
       - run: 
           command: bundle --path vendor/bundle
       - run: 
-          name: Run cucumber tests
           command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
       - store_test_results:
           path: ~/cucumber/junit.xml
