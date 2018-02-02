@@ -19,7 +19,7 @@ jobs:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
         paths:
           - ~/resultados-digitais/vendor/bundle
-          
+
   bundle-denpendencies:
     working_directory: ~/resultados-digitais  
     docker:
@@ -28,7 +28,7 @@ jobs:
       - restore_cache:
           key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys: rd-bundle-{{ checksum "Gemfile.lock" }}
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
       run: bundle install --path vendor/bundle
       - save_cache:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
