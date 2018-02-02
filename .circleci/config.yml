@@ -24,6 +24,7 @@ jobs:
           keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
       - run: 
+          name: Bundle install
           command: bundle install --path vendor/bundle
       - save_cache:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
@@ -42,7 +43,8 @@ jobs:
           keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
       - run:
-          command: rubocop
+          name: Rubocop analyzer
+          command: bundle exec rubocop
 
   test:
     working_directory: ~/resultados-digitais
@@ -56,8 +58,10 @@ jobs:
           keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
       - run: 
+          name: Bundle install
           command: bundle --path vendor/bundle
       - run: 
+          name: Execute all features scenarios (except @wip tags)
           command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
       - store_test_results:
           path: ~/cucumber/junit.xml
