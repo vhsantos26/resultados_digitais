@@ -1,34 +1,53 @@
 version: 2
 jobs:
-  build:
-    working_directory: ~/circle-ci-resultados-digitais
+  checkout_code:
+    working_directory: ~/resultados-digitais
     docker:
-      - image: circleci/ruby:latest-browsers
-
+      - image: circleci/ruby:2.4-node
     steps:
       - checkout
-      
-      # Restore bundle cache
-      - type: cache-restore
-        name: Restore bundle cache
-        key: qaninja-bundle-{{ checksum "Gemfile.lock" }}
-
-      - run:
-          name: Bundle install
-          command: bundle install --path vendor/bundle
-
-      # Store bundle cache
-      - type: cache-save
-        name: Store bundle cache
-        key: qaninja-bundle-{{ checksum "Gemfile.lock" }}
+      -save_cache:
+        key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
         paths:
-          - vendor/bundle
+          ~/resultados-digitais
+  
+  bundle_denpendencies:
+    working_directory: ~/resultados-digitais  
+    docker:
+      - image: circleci/ruby:2.4-node
+    steps:
+      - restore_cache:
+          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+      run: bundle install --path vendor/bundle
+      - save_cache:
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+        paths:
+          - ~/resultados-digitais/vendor/bundle
 
-      # Run cucumber
-      - run:
-          name: Run cucumber tests
-          command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
-
-      # Save test results for timing analysis
+  test:
+    working_directory: ~/resultados-digitais
+    docker:
+      - image: circleci/ruby:latest-browsers
+    steps:
+      - restore_cache:
+          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle --path vendor/bundle
+      - run: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
       - store_test_results:
           path: ~/cucumber/junit.xml
+
+workflows:
+  version: 2
+  build_and-test:
+    jobs:
+      - checkout_code
+      - bundle_denpendencies
+          requires: 
+            - checkout_code
+      - test:
+          requires:
+            - bundle_denpendencies

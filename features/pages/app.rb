@@ -2,7 +2,6 @@ require_relative 'authentication/authentication'
 require_relative 'dashboard/dashboard'
 
 module App
-  # Application test
   class Application
     def login_index
       App::Pages::Authentication::Login::IndexPage.new

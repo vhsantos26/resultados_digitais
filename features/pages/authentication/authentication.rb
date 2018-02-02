@@ -2,7 +2,6 @@ module App
   module Pages
     module Authentication
       module Login
-        # Login index
         class IndexPage < SitePrism::Page
           set_url 'login/'
           element :email_input, 'input[type=email]'
@@ -18,7 +17,6 @@ module App
       end
 
       module Logout
-        # Logout class
         class IndexPage < SitePrism::Page
           set_url '/logout'
         end
