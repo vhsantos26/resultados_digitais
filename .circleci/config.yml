@@ -22,15 +22,16 @@ jobs:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - rd-bundle-{{ checksum "Gemfile.lock" }}
-            - rd-bundle-
+            - rd-bundle-{{ .Branch }}
       - run: 
           name: Bundle install
           command: bundle install --path vendor/bundle
       - save_cache:
-          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+          key: rd-bundle-{{ .Branch }}-{{ epoch }}
           paths:
             - ~/resultados-digitais/vendor/bundle
+      - save_cache:
+          key: rd-bundle-{{ .Branch }}
   
   code_analyzer:
     working_directory: ~/resultados-digitais  
@@ -42,8 +43,7 @@ jobs:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - rd-bundle-{{ checksum "Gemfile.lock" }}
-            - rd-bundle-
+            - rd-bundle-{{ .Branch }}
       - run:
           name: Rubocop analyzer
           command: bundle exec rubocop
@@ -58,8 +58,7 @@ jobs:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - rd-bundle-{{ checksum "Gemfile.lock" }}
-            - rd-bundle-
+            - rd-bundle-{{ .Branch }}
       - run: 
           name: Execute all features scenarios (except @wip tags)
           command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
