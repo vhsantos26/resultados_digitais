@@ -67,7 +67,7 @@ jobs:
 
 workflows:
   version: 2
-  nightl:
+  nightly:
     triggers:
       - schedule:
         cron: "0 */6 * * *"
