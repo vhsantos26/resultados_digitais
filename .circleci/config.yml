@@ -23,6 +23,7 @@ jobs:
       - restore_cache:
           keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
+            - rd-bundle-
       - run: 
           name: Bundle install
           command: bundle install --path vendor/bundle
@@ -42,6 +43,7 @@ jobs:
       - restore_cache:
           keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
+            - rd-bundle-
       - run: 
           name: Bundle install
           command: bundle --path vendor/bundle
@@ -60,6 +62,7 @@ jobs:
       - restore_cache:
           keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
+            - rd-bundle-
       - run: 
           name: Bundle install
           command: bundle --path vendor/bundle
