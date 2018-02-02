@@ -21,9 +21,11 @@ jobs:
       - image: circleci/ruby:2.4-node
     steps:
       - restore_cache:
-          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+          keys:
+            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+          keys:
+            - rd-bundle-{{ checksum "Gemfile.lock" }}
       run: bundle install --path vendor/bundle
       - save_cache:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
@@ -35,10 +37,12 @@ jobs:
     docker:
       - image: circleci/ruby:latest-browsers
     steps:
+     - restore_cache:
+          keys:
+            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+          keys:
+            - rd-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run: 
           name: Run cucumber tests
