@@ -23,8 +23,11 @@ jobs:
       - restore_cache:
           keys:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
-            - rd-bundle-{{ checksum Gemfile.lock }}
-      run: bundle install --path vendor/bundle
+      - restore_cache:
+          keys:
+            - rd-bundle-{{ checksum "Gemfile.lock" }}
+      - run: 
+        command: bundle install --path vendor/bundle
       - save_cache:
           key: rd-bundle-{{ checksum "Gemfile.lock" }}
           paths:
@@ -32,16 +35,17 @@ jobs:
   
   code_analyzer:
     working_directory: ~/resultados-digitais  
-        docker:
-          - image: circleci/ruby:2.4-node
-        steps:
-          - restore_cache:
-              keys:
-                - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
-                - rd-bundle-{{ checksum "Gemfile.lock" }}
-          run:
-            name: Run static code analyzer
-            command: rubocop
+    docker:
+      - image: circleci/ruby:2.4-node
+    steps:
+      - restore_cache:
+          keys:
+            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - rd-bundle-{{ checksum "Gemfile.lock" }}
+      - run:
+        command: rubocop
 
   test:
     working_directory: ~/resultados-digitais
@@ -51,8 +55,11 @@ jobs:
      - restore_cache:
           keys:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle --path vendor/bundle
+      - run: 
+          command: bundle --path vendor/bundle
       - run: 
           name: Run cucumber tests
           command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
