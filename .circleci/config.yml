@@ -46,6 +46,9 @@ jobs:
       - restore_cache:
           keys:
             - rd-bundle-{{ .Branch }}
+      - run: 
+          name: Bundle install
+          command: bundle install --path vendor/bundle
       - run:
           name: Rubocop analyzer
           command: bundle exec rubocop
@@ -61,6 +64,9 @@ jobs:
       - restore_cache:
           keys:
             - rd-bundle-{{ .Branch }}
+      - run: 
+          name: Bundle install
+          command: bundle install --path vendor/bundle
       - run: 
           name: Execute all features scenarios (except @wip tags)
           command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
