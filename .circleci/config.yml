@@ -11,9 +11,9 @@ jobs:
     steps:
       - checkout
       - save_cache:
-        key: repo-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - ~/resultados-digitais
+          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/resultados-digitais
 
   build-denpendencies:
     working_directory: ~/resultados-digitais  
@@ -21,14 +21,14 @@ jobs:
       - image: circleci/ruby:2.4-node
     steps:
       - restore_cache:
-          keys: 
-            - repo-{{ .Environment.CIRCLE_SHA1 }}
-            - gemgile-{{ checksum "Gemfile.lock" }}
+          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
       run: bundle install --path vendor/bundle
       - save_cache:
-          key: gemgile-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ~/resultados-digitais/vendor/bundle
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/resultados-digitais/vendor/bundle
 
   test:
     working_directory: ~/resultados-digitais
@@ -36,9 +36,9 @@ jobs:
       - image: circleci/ruby:latest-browsers
     steps:
       - restore_cache:
-          keys: 
-            - repo-{{ .Environment.CIRCLE_SHA1 }}
-            - gemgile-{{ checksum "Gemfile.lock" }}
+          key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run: 
           name: Run cucumber tests
