@@ -21,7 +21,7 @@ jobs:
           keys: 
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys: 
+          keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
       run: bundle install --path vendor/bundle
       - save_cache:
@@ -35,10 +35,10 @@ jobs:
       - image: circleci/ruby:latest-browsers
     steps:
       - restore_cache:
-          keys: 
+          keys:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys: 
+          keys:
             - rd-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run: 
