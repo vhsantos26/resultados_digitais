@@ -7,7 +7,7 @@ jobs:
       - image: circleci/ruby:2.4-node
     steps:
       - checkout
-      -save_cache:
+      - save_cache:
         key: rd-repo-{{ .Environment.CIRCLE_SHA1 }}
         paths:
           - ~/resultados-digitais
