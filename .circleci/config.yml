@@ -22,12 +22,12 @@ jobs:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .Revision }}
+            - rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .BuildNum }}
       - run: 
           name: Bundle install
           command: bundle install --path vendor/bundle
       - save_cache:
-          key: rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .Revision }}
+          key: rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .BuildNum }}
           paths:
             - ~/resultados-digitais/vendor/bundle
   
@@ -41,7 +41,7 @@ jobs:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .Revision }}
+            - rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .BuildNum }}
       - run:
           name: Rubocop analyzer
           command: bundle exec rubocop
@@ -56,7 +56,7 @@ jobs:
             - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .Revision }}
+            - rd-bundle-{{ checksum "Gemfile.lock" }}-{{ .BuildNum }}
       - run: 
           name: Bundle install
           command: bundle --path vendor/bundle
