@@ -67,10 +67,6 @@ jobs:
 
 workflows:
   version: 2
-  nightly:
-    triggers:
-      - schedule:
-        cron: "0 */6 * * *"
   build_and_test:
     jobs:
       - checkout_code
