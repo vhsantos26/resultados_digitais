@@ -78,7 +78,7 @@ workflows:
   build_and_test:
     triggers:
       - schedule:
-          cron: "15 17 * * *"
+          cron: "* 4 * * *"
           filters:
             branches:
               only: master
