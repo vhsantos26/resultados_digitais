@@ -32,6 +32,8 @@ jobs:
             - ~/resultados-digitais/vendor/bundle
       - save_cache:
           key: rd-bundle-{{ .Branch }}
+          paths: 
+            - ~/resultados-digitais/vendor/bundle
   
   code_analyzer:
     working_directory: ~/resultados-digitais  
