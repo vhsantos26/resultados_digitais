@@ -4,20 +4,18 @@ require 'rspec/expectations'
 require 'selenium-webdriver'
 require 'site_prism'
 
-Capybara.configure do |c|
-  c.app_host = 'https://app-staging.rdstation.com.br/'
-  c.ignore_hidden_elements = false
-  c.default_max_wait_time = 5
-end
+BROWSER = ENV['BROWSER']
 
-Capybara.register_driver Capybara.default_driver do |app|
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
-      'chromeOptions' => {
-        'args' => ['--disable-infobars', '--start-maximized']
-      }
-    )
-  )
+Capybara.configure do |config|
+  config.app_host = 'https://app-staging.rdstation.com.br/'
+  config.ignore_hidden_elements = false
+  config.default_max_wait_time = 5
+
+  if BROWSER.eql? 'chrome'
+    config.default_driver = :selenium_chrome
+  elsif BROWSER.eql? 'firefox'
+    config.default_driver = :selenium
+  else
+    config.default_driver = :selenium_chrome
+  end
 end

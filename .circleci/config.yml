@@ -53,7 +53,7 @@ jobs:
           name: Rubocop analyzer
           command: bundle exec rubocop
 
-  test:
+  chrome_test:
     working_directory: ~/resultados-digitais
     docker:
       - image: circleci/ruby:latest-browsers
@@ -68,8 +68,28 @@ jobs:
           name: Bundle install
           command: bundle install --path vendor/bundle
       - run: 
-          name: Execute all features scenarios (except @wip tags)
-          command: bundle exec cucumber --tag 'not @wip' --format junit --out ~/cucumber/junit.xml
+          name: Execute all features scenarios (except @wip tags) on Goole Chrome browser
+          command: bundle exec cucumber --profile chrome --profile not_wip --profile ci
+      - store_test_results:
+          path: ~/cucumber/junit.xml
+
+  firefox_test:
+    working_directory: ~/resultados-digitais
+    docker:
+      - image: circleci/ruby:latest-browsers
+    steps:
+      - restore_cache:
+          keys:
+            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - rd-bundle-{{ .Branch }}
+      - run: 
+          name: Bundle install
+          command: bundle install --path vendor/bundle
+      - run: 
+          name: Execute all features scenarios (except @wip tags) on Goole Chrome browser
+          command: bundle exec cucumber --profile firefox --profile not_wip --profile ci
       - store_test_results:
           path: ~/cucumber/junit.xml
 
@@ -90,6 +110,11 @@ workflows:
       - code_analyzer:
           requires:
             - bundle_dependencies
-      - test:
+      - chrome_test:
           requires:
             - bundle_dependencies
+            - code_analyzer
+      - firefox_test:
+          requires:
+            - bundle_dependencies
+            - code_analyzer

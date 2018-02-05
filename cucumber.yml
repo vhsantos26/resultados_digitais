@@ -1,0 +1,5 @@
+---
+not_wip: --tags 'not @wip'
+ci: --format junit --out ~/cucumber/junit.xml
+chrome: BROWSER=chrome
+firefox: BROWSER=firefox
