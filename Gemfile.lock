@@ -49,7 +49,6 @@ GEM
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
-    rake (12.3.0)
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
@@ -79,7 +78,6 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber
-  rake
   rspec-expectations
   rubocop (= 0.52.1)
   selenium-webdriver
