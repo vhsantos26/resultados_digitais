@@ -56,7 +56,7 @@ jobs:
   chrome_test:
     working_directory: ~/resultados-digitais
     docker:
-      - image: selenium/standalone-chrome
+      - image: circleci/ruby:latest-browsers
     steps:
       - restore_cache:
           keys:
@@ -73,35 +73,35 @@ jobs:
       - store_test_results:
           path: ~/cucumber/junit.xml
 
-  firefox_test:
-    working_directory: ~/resultados-digitais
-    docker:
-      - image: selenium/standalone-firefox
-    steps:
-      - restore_cache:
-          keys:
-            - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          keys:
-            - rd-bundle-{{ .Branch }}
-      - run: 
-          name: Bundle install
-          command: bundle install --path vendor/bundle
-      - run: 
-          name: Execute all features scenarios (except @wip tags) on Goole Chrome browser
-          command: bundle exec cucumber --profile firefox --profile not_wip --profile ci
-      - store_test_results:
-          path: ~/cucumber/junit.xml
+  # firefox_test:
+  #   working_directory: ~/resultados-digitais
+  #   docker:
+  #     - image: circleci/ruby:latest-browsers
+  #   steps:
+  #     - restore_cache:
+  #         keys:
+  #           - rd-repo-{{ .Environment.CIRCLE_SHA1 }}
+  #     - restore_cache:
+  #         keys:
+  #           - rd-bundle-{{ .Branch }}
+  #     - run: 
+  #         name: Bundle install
+  #         command: bundle install --path vendor/bundle
+  #     - run: 
+  #         name: Execute all features scenarios (except @wip tags) on Goole Chrome browser
+  #         command: bundle exec cucumber --profile firefox --profile not_wip --profile ci
+  #     - store_test_results:
+  #         path: ~/cucumber/junit.xml
 
 workflows:
   version: 2
   build_and_test:
-    # triggers:
-    #   - schedule:
-    #       cron: "* 4 * * *"
-    #       filters:
-    #         branches:
-    #           only: master
+    triggers:
+      - schedule:
+          cron: "* 4 * * *"
+          filters:
+            branches:
+              only: master
     jobs:
       - checkout_code
       - bundle_dependencies:
@@ -114,7 +114,7 @@ workflows:
           requires:
             - bundle_dependencies
             - code_analyzer
-      - firefox_test:
-          requires:
-            - bundle_dependencies
-            - code_analyzer
+      # - firefox_test:
+      #     requires:
+      #       - bundle_dependencies
+      #       - code_analyzer
