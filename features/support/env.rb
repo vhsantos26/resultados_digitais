@@ -11,11 +11,11 @@ Capybara.configure do |config|
   config.ignore_hidden_elements = false
   config.default_max_wait_time = 5
 
-  if BROWSER.eql? 'chrome'
-    config.default_driver = :selenium_chrome
-  elsif BROWSER.eql? 'firefox'
-    config.default_driver = :selenium
-  else
-    config.default_driver = :selenium_chrome
-  end
+  config.default_driver = if BROWSER.eql? 'chrome'
+                            :selenium_chrome
+                          elsif BROWSER.eql? 'firefox'
+                            :selenium
+                          else
+                            :selenium_chrome
+                          end
 end
