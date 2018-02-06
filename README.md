@@ -8,7 +8,7 @@
 
 UI Tests for RD Station app. All automated scenarios are describe here:
 
-- [Login](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/login/login.feature).
+- [Login](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/authentication.feature).
 - [Leads](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/relate/base/lead.feature).
 
 ## Requirements

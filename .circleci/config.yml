@@ -71,7 +71,9 @@ jobs:
           name: Execute all features scenarios (except @wip tags) on Goole Chrome browser
           command: bundle exec cucumber --profile chrome --profile not_wip --profile ci
       - store_test_results:
-          path: ~/cucumber/junit.xml
+          path: ~/cucumber
+      - store_artifacts:
+          path: ~/cucumber
 
   # firefox_test:
   #   working_directory: ~/resultados-digitais
@@ -96,12 +98,12 @@ jobs:
 workflows:
   version: 2
   build_and_test:
-    triggers:
-      - schedule:
-          cron: "* 4 * * *"
-          filters:
-            branches:
-              only: master
+    # triggers:
+    #   - schedule:
+    #       cron: "* 4 * * *"
+    #       filters:
+    #         branches:
+    #           only: master
     jobs:
       - checkout_code
       - bundle_dependencies:
