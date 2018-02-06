@@ -1,5 +1,5 @@
 ---
 not_wip: --tags 'not @wip'
-ci: pretty --format json --out ~/report/cucumber.json
+ci: pretty --format json --out ~/resultados-digitais/report/cucumber.json
 chrome: BROWSER=chrome
 firefox: BROWSER=firefox
