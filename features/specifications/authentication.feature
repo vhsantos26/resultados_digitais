@@ -6,6 +6,6 @@ Feature: RD Station Authentication
 
   @successful
   Scenario: Authentication successfully.
-		When I perform authentication with "vhsantos26@gmail.com" email and "111111" password.
+    When I perform authentication with "vhsantos26@gmail.com" email and "111111" password.
     Then I am authenticated successfully.
     And I should see Dashboard page.

@@ -51,7 +51,7 @@ jobs:
           command: bundle install --path vendor/bundle
       - run:
           name: Rubocop analyzer
-          command: bundle exec rubocop
+          command: bundle exec rubocop -c .rubocop.yml
 
   chrome_test:
     working_directory: ~/resultados-digitais
@@ -69,7 +69,7 @@ jobs:
           command: bundle install --path vendor/bundle
       - run: 
           name: Execute all features scenarios (except @wip tags) on Goole Chrome browser
-          command: bundle exec cucumber --profile chrome --profile not_wip --profile ci
+          command: bundle exec cucumber --profile ci_report --profile not_wip
       - store_test_results:
           path: ~/cucumber/junit.xml
       - store_artifacts:
@@ -98,12 +98,12 @@ jobs:
 workflows:
   version: 2
   build_and_test:
-    triggers:
-      - schedule:
-          cron: "* 4 * * *"
-          filters:
-            branches:
-              only: master
+#    triggers:
+#      - schedule:
+#          cron: "* 4 * * *"
+#          filters:
+#            branches:
+#              only: master
     jobs:
       - checkout_code
       - bundle_dependencies:

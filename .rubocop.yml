@@ -4,11 +4,9 @@
 Documentation:
   Enabled: false
 
-ModuleLength:
-  Enabled: false
+LineLength:
+  Max: 150
 
-ClassLength:
+Style/MixinUsage:
   Enabled: false
   
-LineLength:
-  Max: 180

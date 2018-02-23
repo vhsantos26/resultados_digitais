@@ -2,15 +2,13 @@
 
 ## Build Status
 
-[![CircleCI](https://circleci.com/gh/vhsantos26/resultados_digitais.svg?style=shield&circle-token=426eec69a01e4ff52018e7d76474e03255ba349a)](https://circleci.com/gh/vhsantos26/resultados_digitais)
+[![CircleCI](https://circleci.com/gh/vhsantos26/resultados_digitais.svg?style=shield&circle-token=7e4cb60de07ec725498ad1cbc34db9c1aee82aa5)](https://circleci.com/gh/vhsantos26/resultados_digitais)
 
 ## Description
 
 UI Tests for RD Station app. All automated scenarios are describe here:
 
 - [Login](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/authentication.feature).
-- [Leads](https://github.com/vhsantos26/resultados_digitais/blob/master/features/specifications/relate/base/lead.feature).
-
 ## Requirements
 
 - Ruby 2.4
@@ -22,7 +20,7 @@ Usage:
 
 - Clone this project
 - On path `resultados_digitais/` execute the command `bundle install`
-- Run all test with `bundle exec cucumber --tags ~@wip`
+- Run all test with `bundle exec cucumber
 
 ## Observed issues
 
