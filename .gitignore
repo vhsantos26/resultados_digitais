@@ -9,7 +9,8 @@
 /test/version_tmp/
 /tmp/
 .vscode/
-
+/output/**/*.json
+/output/**/*.html
 
 # Used by dotenv library to load environment variables.
 # .env

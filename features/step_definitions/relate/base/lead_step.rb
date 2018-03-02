@@ -1,13 +1,8 @@
-require_relative '../../../pages/relate/base/leads'
-
-lead = Leads.new
-
 Given('I have access to Base of Leads App.') do
-  lead.load
+  pending # Write code here that turns the phrase above into concrete actions
 end
 
 Given('I insert a new lead manually with:') do |table|
-  puts table.hashes
   pending # Write code here that turns the phrase above into concrete actions
 end
 
