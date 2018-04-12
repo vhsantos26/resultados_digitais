@@ -10,3 +10,5 @@ LineLength:
 Style/MixinUsage:
   Enabled: false
   
+Style/ClassAndModuleChildren: 
+  Enabled: false
