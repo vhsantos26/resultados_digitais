@@ -23,3 +23,5 @@ Feature: New lead
       | Exception  | I am Groot |       |
     When I save this register.
     Then I should see a alert about required field.
+
+    # Não foi possível criar o Lead, por favor verifique os campos

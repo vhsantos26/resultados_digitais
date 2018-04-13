@@ -1,11 +1,5 @@
-module App
-  module Sections
-    module Layouts
-      module Shared
-        class Navbar < SitePrism::Section
-          element :logo, '#logoRDStationMarketing'
-        end
-      end
-    end
+module Navbar
+  class NavbarSection < SitePrism::Section
+    element :logo, '#logoRDStationMarketing'
   end
 end

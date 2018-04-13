@@ -1,37 +1,23 @@
 require_relative 'authentication/authentication'
 require_relative 'dashboard/dashboard'
-require_relative 'relate/base_of_lead/new_lead'
+require_relative 'relate/base_of_lead/base_of_lead'
 
 module App
   class Application
     def login_index
-      App::Pages::Authentication::Login::IndexPage.new
+      Authentication::LoginPage.new
     end
 
     def logout_index
-      App::Pages::Authentication::Logout::IndexPage.new
+      Authentication::LogoutPage.new
     end
 
     def dashboard_index
-      App::Pages::Dashboard::IndexPage.new
+      Dashboard::HomePage.new
     end
 
     def new_lead_index
-      NewLead.new
-    end
-
-    class NewLead
-      def conversion_index
-        App::Pages::NewLead::Conversion::IndexPage.new
-      end
-
-      def identification_index
-        App::Pages::NewLead::Identification::IndexPage.new
-      end
-
-      def footer_section
-        App::Pages::NewLead::Sections::Footer.new
-      end
+      LeadsBase.new_lead
     end
   end
 end
