@@ -16,8 +16,8 @@ module App
       Dashboard::HomePage.new
     end
 
-    def new_lead_index
-      LeadsBase.new_lead
+    def leads_base_index
+      LeadsBase::LeadsBasePage.new
     end
   end
 end

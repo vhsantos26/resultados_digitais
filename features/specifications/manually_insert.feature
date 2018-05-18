@@ -1,4 +1,4 @@
-@wip @lead
+@lead @wip
 Feature: New lead
   In order to increase my base of leads.
   As a RD client.
@@ -16,7 +16,7 @@ Feature: New lead
     When I save this registed.
     Then I should see the new lead informations.
 
-  @exception @new_lead
+  @exception @new_lead @wip
   Scenario: Show error message when try to insert manually without email.
     And I insert a new lead manually with:
       | event_name | name       | email |

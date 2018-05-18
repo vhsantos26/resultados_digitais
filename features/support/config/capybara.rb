@@ -1,7 +1,7 @@
 Capybara.configure do |config|
   config.app_host = ENV['APPLICATION_BASE_URL']
   config.ignore_hidden_elements = false
-  config.default_max_wait_time = 5
+  config.default_max_wait_time = 10
   config.default_driver = BROWSER = (ENV['DRIVER'] || 'chrome').to_sym
 end
 

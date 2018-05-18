@@ -10,6 +10,8 @@ Dotenv.load # realiza o load das variaveis do arquivo .env
 
 class Cucumber::Core::Test::Step
   def name
-    text
+    return text if text == 'Before hook'
+    return text if text == 'After hook'
+    "#{source.last.keyword}#{text}"
   end
 end
